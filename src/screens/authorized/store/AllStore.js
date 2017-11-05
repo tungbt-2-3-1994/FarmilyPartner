@@ -47,6 +47,13 @@ class AllStore extends Component {
         // this._handleConnectionChange = this._handleConnectionChange.bind(this);
     }
 
+    componentWillMount() {
+        console.log('asas', this.props.user.user.user.id);
+        this.props.getAllStores();
+    }
+
+
+
     // moveMapToLocation(latlng) {
     //     this.refs.map.animateToRegion({
     //         latitudeDelta: 0.015,
@@ -54,6 +61,8 @@ class AllStore extends Component {
     //         ...latlng
     //     }, 2000);
     // }
+
+
 
     // componentWillMount() {
     //     this.props.getAllStores(this.props.user.user.id);

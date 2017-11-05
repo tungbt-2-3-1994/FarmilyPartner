@@ -3,10 +3,12 @@ import { GET_ALL_STORES, FETCH_STORE_BY_ID, FAIL_TO_GET_STORES, SEARCH_STORE_BY_
 export const getAllStores = (partner_id) => {
     return (dispatch) => {
         // call API get all stores
-        fetch(`http://farm.ongnhuahdpe.com/partners/${partner_id}/stores`)
+        fetch(`http://farm.ongnhuahdpe.com/partner/stores`)
             .then(response => response.json())
             .then((responseData) => {
+                console.log('res', responseData);
                 if (responseData.status === 'success') {
+                    console.log('res', responseData.data);
                     dispatch({
                         type: GET_ALL_STORES,
                         payload: responseData.data

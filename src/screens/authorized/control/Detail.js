@@ -5,7 +5,16 @@ import {
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import { socket } from '../../Socket';
+import io from 'socket.io-client/dist/socket.io';
+
+const config = {
+    reconnection: true,
+    reconnectionDelay: 1000,
+    reconnectionDelayMax: 5000,
+    reconnectionAttempts: 10000
+};
+
+const SOCKET_URL = 'http://farm.ongnhuahdpe.com:3000';
 
 const { width, height } = Dimensions.get('window');
 
@@ -33,12 +42,13 @@ class Detail extends Component {
 
     constructor(props) {
         super(props);
-        socket.emit('authenticate', { 'token': this.props.user.auth_token });
+        this.socket = io.connect(SOCKET_URL, { config });
+        this.socket.emit('authenticate', { 'token': this.props.user.auth_token });
     }
 
     componentWillUnmount() {
         let { id } = this.props.navigation.state.params;
-        socket.removeListener(`device_${id}_state`);
+        this.socket.removeListener(`device_${id}_state`);
         console.log('asjasga');
     }
 
@@ -91,7 +101,8 @@ class Detail extends Component {
         console.log('{}', typeof {});
         let { id } = this.props.navigation.state.params;
         console.log('id', id);
-        socket.on(`device_${id}_state`, (data) => {
+        this.socket.on(`device_${id}_state`, (data) => {
+            console.log(data);
             let tstr = '{' + data.replace(/\*/g, '\"') + '}';
             // console.log(JSON.parse(tstr));
             let json = JSON.parse(tstr);
@@ -116,21 +127,6 @@ class Detail extends Component {
         });
     }
 
-    // if (JSON.stringify(this.state.data) !== JSON.stringify(json))
-
-    // onButtonPress = () => {
-    //     // console.log('asasas');
-    //     socket.emit('change_device_state', {
-    //         'device_id': this.props.navigation.state.params.id,
-    //         'data': {
-    //             "Header": "S",
-    //             "Command": "64",
-    //             "time": "10:56:29",
-    //         }
-    //     });
-    //     // socket.removeListener('device_1_state');
-    // }
-
     handleData = (data) => {
         this.setState({
             data: data,
@@ -142,7 +138,7 @@ class Detail extends Component {
         this.setState({
             loading: true
         });
-        socket.emit('change_device_state', {
+        this.socket.emit('change_device_state', {
             'device_id': this.props.navigation.state.params.id,
             'data': {
                 "Header": "S",
@@ -156,7 +152,7 @@ class Detail extends Component {
         this.setState({
             loading: true
         });
-        socket.emit('change_device_state', {
+        this.socket.emit('change_device_state', {
             'device_id': this.props.navigation.state.params.id,
             'data': {
                 "Header": "S",
@@ -170,7 +166,7 @@ class Detail extends Component {
         this.setState({
             loading: true
         });
-        socket.emit('change_device_state', {
+        this.socket.emit('change_device_state', {
             'device_id': this.props.navigation.state.params.id,
             'data': {
                 "Header": "S",
@@ -184,7 +180,7 @@ class Detail extends Component {
         this.setState({
             loading: true
         });
-        socket.emit('change_device_state', {
+        this.socket.emit('change_device_state', {
             'device_id': this.props.navigation.state.params.id,
             'data': {
                 "Header": "S",
@@ -198,7 +194,7 @@ class Detail extends Component {
         this.setState({
             loading: true
         });
-        socket.emit('change_device_state', {
+        this.socket.emit('change_device_state', {
             'device_id': this.props.navigation.state.params.id,
             'data': {
                 "Header": "S",
@@ -212,7 +208,7 @@ class Detail extends Component {
         this.setState({
             loading: true
         });
-        socket.emit('change_device_state', {
+        this.socket.emit('change_device_state', {
             'device_id': this.props.navigation.state.params.id,
             'data': {
                 "Header": "S",
@@ -226,7 +222,7 @@ class Detail extends Component {
         this.setState({
             loading: true
         });
-        socket.emit('change_device_state', {
+        this.socket.emit('change_device_state', {
             'device_id': this.props.navigation.state.params.id,
             'data': {
                 "Header": "S",

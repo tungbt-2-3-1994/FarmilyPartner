@@ -9,7 +9,7 @@ import { getAllDevices } from '../../../actions';
 
 const { height, width } = Dimensions.get('window');
 
-import { socket } from '../../Socket';
+// import { socket } from '../../Socket';
 
 class Control extends Component {
 
@@ -58,12 +58,8 @@ class Control extends Component {
     }
 
     render() {
-        // console.log('loading', this.state.loading);
         return (
             <View style={{ flex: 1, backgroundColor: '#D2D2D2' }}>
-                {/* <TouchableOpacity onPress={() => this.onButtonPress()}>
-                    <Text>Press Me</Text>
-                </TouchableOpacity> */}
                 <FlatList
                     data={this.props.device.device.devices}
                     renderItem={({ item }) => (

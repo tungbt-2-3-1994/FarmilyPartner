@@ -35,31 +35,54 @@ class Account extends Component {
 
     render() {
         let view;
+        let avatarView;
+        if (this.props.loggedIn) {
+            if (this.props.user.user.avatar_url != null) {
+                avatarView = <Image style={{ width: width / 2, height: width / 2, borderRadius: width / 4, resizeMode: 'contain', marginBottom: 10 }} source={{ uri: this.props.user.user.avatar_url }} />;
+            } else {
+                avatarView = <Image style={{ width: width / 2, height: width / 2, borderRadius: width / 4, resizeMode: 'contain', marginBottom: 10 }} source={require('../../../img/normalAcc.png')} />;
+            }
+        }
         if (this.props.loggedIn === true && this.props.user !== null) {
             view = (
                 <ScrollView style={{ flex: 1, flexDirection: 'column' }}>
                     <View style={{ justifyContent: 'center', alignItems: 'center', width: width, height: width * 3 / 5, backgroundColor: '#00FFFF' }}>
-                        <Image style={{ width: width / 2, height: width / 2, borderRadius: width / 4, resizeMode: 'contain', marginBottom: 10 }} source={require('../../../img/logofarmily.png')} />
+                        {/* <Image style={{ borderColor: '#CACACA', borderWidth: 1, width: width / 2, height: width / 2, borderRadius: width / 4, resizeMode: 'contain', marginBottom: 10 }} source={require('../../img/noImage.jpg')} /> */}
+                        {avatarView}
                     </View>
                     <View style={{ backgroundColor: 'white', margin: 10, borderRadius: 5, padding: 10 }}>
-                        <Text style={{ fontFamily: 'Baskerville-BoldItalic', fontSize: 18 }}>
-                            Tên: {this.props.user !== null ? this.props.user.user.name : 'Erroe'}
+                        <Text>
+                            <Text>Tên: </Text>
+                            <Text style={{ fontFamily: 'Baskerville-BoldItalic', fontSize: 18 }}>
+                                {this.props.user.user !== null ? this.props.user.user.name : null}
+                            </Text>
                         </Text>
                     </View>
                     <View style={{ backgroundColor: 'white', margin: 10, borderRadius: 5, padding: 10 }}>
-                        <Text style={{ fontFamily: 'Baskerville-BoldItalic', fontSize: 18 }}>
-                            Phone Number: {this.props.user !== null ? this.props.user.user.phone_number : 'Không có'}
+                        <Text>
+                            <Text>Số điện thoại: </Text>
+                            <Text style={{ fontFamily: 'Baskerville-BoldItalic', fontSize: 18 }}>
+                                {this.props.user.user !== null ? this.props.user.user.phone_number : 'Không có'}
+                            </Text>
                         </Text>
+
                     </View>
                     <View style={{ backgroundColor: 'white', margin: 10, borderRadius: 5, padding: 10 }}>
-                        <Text style={{ fontFamily: 'Baskerville-BoldItalic', fontSize: 18 }}>
-                            Email: {this.props.user !== null ? this.props.user.user.email : 'Không có'}
+                        <Text>
+                            <Text>Email: </Text>
+                            <Text style={{ fontFamily: 'Baskerville-BoldItalic', fontSize: 18 }}>
+                                {this.props.user.user !== null ? this.props.user.user.email : 'Không có'}
+                            </Text>
                         </Text>
+
                     </View>
                     <Container>
                         <ButtonLogin
                             styles={{ button: styles.transparentButtonOut }}
-                            onPress={() => { this.props.logout() }}
+                            onPress={() => {
+                                this.setState({ animating: true });
+                                this.props.logout()
+                            }}
                         >
                             <View style={styles.inline}>
                                 <Text style={[styles.buttonBlueText, styles.buttonBigText]}>  Đăng xuất </Text>
