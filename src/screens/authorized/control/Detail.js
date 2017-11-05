@@ -11,7 +11,8 @@ const config = {
     reconnection: true,
     reconnectionDelay: 1000,
     reconnectionDelayMax: 5000,
-    reconnectionAttempts: 10000
+    reconnectionAttempts: 10000,
+    connect_timeout: 10000
 };
 
 const SOCKET_URL = 'http://farm.ongnhuahdpe.com:3000';

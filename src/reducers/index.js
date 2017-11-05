@@ -11,7 +11,7 @@ import Device from './Device';
 export default combineReducers({
     nav: Navigation,
     userInfor: UserInfor,
-    device: Device,
+    partner: Device,
     // store: Store,
     // searchBox: SearchBox,
     // storeBySearch: StoreBySearch,

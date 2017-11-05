@@ -9,6 +9,9 @@ import { getAllDevices } from '../../../actions';
 
 const { height, width } = Dimensions.get('window');
 
+const STATION = 'devices';
+const STORE = 'device';
+
 // import { socket } from '../../Socket';
 
 class Control extends Component {
@@ -61,11 +64,25 @@ class Control extends Component {
         return (
             <View style={{ flex: 1, backgroundColor: '#D2D2D2' }}>
                 <FlatList
-                    data={this.props.device.device.devices}
+                    data={this.props.store[STATION]}
                     renderItem={({ item }) => (
                         <TouchableOpacity onPress={() => this.onItemPress(item.id, item.identify_code)} style={styles.flatItem} >
-                            <Text style={styles.name}>Mã thiết bị: {item.identify_code}</Text>
-                            <Text style={{ marginBottom: 5, marginTop: 10 }}>Tên: {item.name}</Text>
+                            <Text style={styles.name}> {item.name.toUpperCase()}</Text>
+                            <View style={{ flexDirection: 'row', marginBottom: 5, marginTop: 10 }}>
+                                <Text style={{ flex: 0.2 }}>Cửa hàng</Text>
+                                <Text style={{ flex: 0.05 }}>:</Text>
+                                <Text style={{ flex: 0.75, fontWeight: 'bold' }}>{this.props.store.name}</Text>
+                            </View>
+                            <View style={{ flexDirection: 'row', marginBottom: 5, marginTop: 10 }}>
+                                <Text style={{ flex: 0.2 }}>Địa chỉ</Text>
+                                <Text style={{ flex: 0.05 }}>:</Text>
+                                <Text style={{ flex: 0.75, fontWeight: 'bold' }}>{this.props.store.address}</Text>
+                            </View>
+                            <View style={{ flexDirection: 'row', marginBottom: 5, marginTop: 10 }}>
+                                <Text style={{ flex: 0.2 }}>Mã số</Text>
+                                <Text style={{ flex: 0.05 }}>:</Text>
+                                <Text style={{ flex: 0.75, fontWeight: 'bold' }}>{item.identify_code}</Text>
+                            </View>
                         </TouchableOpacity>
                     )}
                     keyExtractor={item => item.id}
@@ -81,12 +98,14 @@ const styles = {
         borderRadius: 10, borderColor: '#FFFF', backgroundColor: '#FFFF', borderWidth: 1, alignItems: 'flex-start', justifyContent: 'space-between',
         marginTop: 10,
         marginLeft: 10, marginRight: 10,
-        padding: 5,
+        padding: 7,
     },
     name: {
-        fontFamily: 'Baskerville-BoldItalic',
-        fontSize: 20,
-        color: 'green'
+        fontFamily: 'Baskerville-Bold',
+        fontSize: 30,
+        color: 'green',
+        alignSelf: 'center'
+
     }
 }
 
@@ -95,8 +114,8 @@ const mapStateToProps = (state) => {
     return ({
         loggedIn: state.userInfor.loggedIn,
         user: state.userInfor.user,
-        device: state.device,
-        loading: state.device.loading
+        store: state.partner[STORE],
+        loading: state.partner.loading
     });
 }
 
