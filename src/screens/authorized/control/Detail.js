@@ -250,7 +250,7 @@ class Detail extends Component {
                     <View style={{ marginTop: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
                         <View style={{ borderWidth: 1, borderColor: '#CACACA', justifyContent: 'space-between', width: width / 3 - 6, height: width / 3 - 6, padding: 2 }}>
                             <View style={{ justifyContent: 'space-between', flexDirection: 'row' }}>
-                                <Text style={{ fontFamily: 'Cochin', fontSize: width / 16 }}>{this.state.data.TEMPERATURE}</Text>
+                                <Text style={{ fontFamily: 'Cochin', fontSize: width / 12, color: '#388E3C', marginLeft: width/15 }}>{this.state.data.TEMPERATURE}</Text>
                                 <Icon name='ios-thermometer' size={width / 9} color='#388E3C' />
                             </View>
                             <Text style={{ fontFamily: 'Cochin', fontSize: width / 25 }}>°C</Text>
@@ -259,7 +259,7 @@ class Detail extends Component {
                         </View>
                         <View style={{ borderWidth: 1, borderColor: '#CACACA', justifyContent: 'space-between', width: width / 3 - 6, height: width / 3 - 6, padding: 2 }}>
                             <View style={{ justifyContent: 'space-between', flexDirection: 'row' }}>
-                                <Text style={{ fontFamily: 'Cochin', fontSize: width / 16 }}>{this.state.data.HUMIDITY}</Text>
+                                <Text style={{ fontFamily: 'Cochin', fontSize: width / 12, color: '#388E3C', marginLeft: width/15 }}>{this.state.data.HUMIDITY}</Text>
                                 <Image style={{ width: width / 9, height: width / 9, resizeMode: 'stretch' }} source={require('../../../img/humidity.png')} />
                             </View>
                             <Text style={{ fontFamily: 'Cochin', fontSize: width / 25 }}>%</Text>
@@ -268,7 +268,7 @@ class Detail extends Component {
                         </View>
                         <View style={{ borderWidth: 1, borderColor: '#CACACA', justifyContent: 'space-between', width: width / 3 - 6, height: width / 3 - 6, padding: 2 }}>
                             <View style={{ justifyContent: 'space-between', flexDirection: 'row' }}>
-                                <Text style={{ fontFamily: 'Cochin', fontSize: width / 16 }}>{this.state.data.pH}</Text>
+                                <Text style={{ fontFamily: 'Cochin', fontSize: width / 12, color: '#388E3C', marginLeft: width/15 }}>{this.state.data.pH}</Text>
                                 <Image style={{ width: width / 9, height: width / 9, resizeMode: 'stretch' }} source={require('../../../img/pH.jpg')} />
                             </View>
                             <Text style={{ fontFamily: 'Cochin', fontSize: width / 25 }}>°</Text>
@@ -279,7 +279,7 @@ class Detail extends Component {
                     <View style={{ marginTop: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
                         <View style={{ borderWidth: 1, borderColor: '#CACACA', justifyContent: 'space-between', width: width / 3 - 6, height: width / 3 - 6, padding: 2 }}>
                             <View style={{ justifyContent: 'space-between', flexDirection: 'row' }}>
-                                <Text style={{ fontFamily: 'Cochin', fontSize: width / 16 }}>{this.state.data.EC}</Text>
+                                <Text style={{ fontFamily: 'Cochin', fontSize: width / 12, color: '#388E3C', marginLeft: width/15 }}>{this.state.data.EC}</Text>
                                 <Image style={{ width: width / 9, height: width / 9, resizeMode: 'stretch' }} source={require('../../../img/bolt.png')} />
                             </View>
                             <Text style={{ fontFamily: 'Cochin', fontSize: width / 25 }}>mS/cm</Text>
@@ -288,7 +288,7 @@ class Detail extends Component {
                         </View>
                         <View style={{ borderWidth: 1, borderColor: '#CACACA', justifyContent: 'space-between', width: width / 3 - 6, height: width / 3 - 6, padding: 2 }}>
                             <View style={{ justifyContent: 'space-between', flexDirection: 'row' }}>
-                                <Text style={{ fontFamily: 'Cochin', fontSize: width / 16 }}>{this.state.data.LUX}</Text>
+                                <Text style={{ fontFamily: 'Cochin', fontSize: width / 12, color: '#388E3C', marginLeft: width/15 }}>{this.state.data.LUX}</Text>
                                 <Image style={{ width: width / 9, height: width / 9, resizeMode: 'stretch' }} source={require('../../../img/sun.png')} />
                             </View>
                             <Text style={{ fontFamily: 'Cochin', fontSize: width / 25 }}>Cd</Text>
