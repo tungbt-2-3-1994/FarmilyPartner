@@ -19,7 +19,6 @@ export const css = StyleSheet.create({
     },
     logo: {
         alignSelf: 'center',
-        borderRadius: 80,
         height: 160,
         paddingVertical: 40,
         marginTop: Dimensions.get('window').height / 3 - 110,
@@ -27,7 +26,7 @@ export const css = StyleSheet.create({
         marginBottom: 40
     },
     auth_content: {
-        paddingHorizontal: 30,
+        paddingHorizontal: 30, backgroundColor: 'rgba(233, 235, 238, 0.4)'
     },
     auth_submit: {
         marginTop: 15,

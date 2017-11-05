@@ -86,34 +86,38 @@ class Account extends Component {
                 <ScrollView style={css.auth_content}>
                     <Image
                         style={css.logo}
-                        source={require('../../img/logo.png')}
+                        source={require('../../img/logofarmilytransparent.png')}
                     />
-                    <TextInput
-                        placeholder="Email hoặc tên đăng nhập"
-                        returnKeyType="next"
-                        placeholderTextColor="white"
-                        style={styles.textbox}
-                        onSubmitEditing={() => this.passwordInput.focus()}
-                        underlineColorAndroid='transparent'
-                        keyboardType="email-address"
-                        onChangeText={(text) => { this.setState({ textEmail: text }) }}
-                    />
-                    <TextInput
-                        secureTextEntry={true}
-                        placeholder="Mật khẩu"
-                        returnKeyType="go"
-                        underlineColorAndroid="transparent"
-                        placeholderTextColor="white"
-                        style={styles.textbox}
-                        ref={(input) => this.passwordInput = input}
-                        onChangeText={(text) => { this.setState({ textPassword: text }) }}
-                    />
+                    <View style={{}}>
+                        <TextInput
+                            placeholder="Email hoặc tên đăng nhập"
+                            returnKeyType="next"
+                            placeholderTextColor="#1F4491"
+                            style={styles.textbox}
 
-                    <View style={css.auth_submit}>
-                        <ButtonRounded
-                            onPress={() => { this.onNormalLogin(this.state.textEmail, this.state.textPassword) }}
-                            text="Đăng nhập"
+                            onSubmitEditing={() => this.passwordInput.focus()}
+                            underlineColorAndroid='transparent'
+                            keyboardType="email-address"
+                            onChangeText={(text) => { this.setState({ textEmail: text }) }}
                         />
+                        <TextInput
+                            secureTextEntry={true}
+                            placeholder="Mật khẩu"
+                            returnKeyType="go"
+
+                            underlineColorAndroid="transparent"
+                            placeholderTextColor="#1F4491"
+                            style={styles.textbox}
+                            ref={(input) => this.passwordInput = input}
+                            onChangeText={(text) => { this.setState({ textPassword: text }) }}
+                        />
+
+                        <View style={css.auth_submit}>
+                            <ButtonRounded
+                                onPress={() => { this.onNormalLogin(this.state.textEmail, this.state.textPassword) }}
+                                text="Đăng nhập"
+                            />
+                        </View>
                     </View>
 
                 </ScrollView>
@@ -133,8 +137,10 @@ const styles = {
         backgroundColor: 'transparent',
         borderBottomWidth: 2,
         borderBottomColor: '#fff',
-        color: '#fff',
-        marginBottom: 10,
+        color: '#1F4491',
+        marginBottom: 18,
+        paddingBottom: 3,
+        fontWeight: 'bold'
     },
     activityIndicator: {
         position: 'absolute', top: 0, left: 0,
