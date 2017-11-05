@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import {
-    Dimensions, Switch, View, Text, Image, Button, ActivityIndicator, TouchableOpacity, TextInput, ScrollView, Alert,
+    Dimensions, Switch, View, Text, Image, Button, ActivityIndicator, TouchableOpacity, TextInput, ScrollView, Alert, Modal
 } from 'react-native';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/Ionicons';
+import Icon1 from 'react-native-vector-icons/MaterialIcons';
 
 import io from 'socket.io-client/dist/socket.io';
+
+var e;
 
 const config = {
     reconnection: true,
@@ -27,6 +30,7 @@ class Detail extends Component {
         headerBackTitle: null,
         headerTintColor: 'white',
         headerTitleStyle: { color: 'white', fontFamily: 'Baskerville-BoldItalic', fontSize: 20 },
+        headerRight: <TouchableOpacity style={{ marginRight: 5 }} onPress={() => { e.setModalVisible(true) }}><Icon1 size={20} color='white' name='shopping-cart' /></TouchableOpacity>
     }
 
     state = {
@@ -39,10 +43,16 @@ class Detail extends Component {
         motor4Data: {},
         pumpData: {},
         valveData: {},
+        modalVisible: false,
+    }
+
+    setModalVisible(visible) {
+        this.setState({ modalVisible: visible });
     }
 
     constructor(props) {
         super(props);
+        e = this;
         this.socket = io.connect(SOCKET_URL, { config });
         this.socket.emit('authenticate', { 'token': this.props.user.auth_token });
     }
@@ -103,27 +113,27 @@ class Detail extends Component {
         let { id } = this.props.navigation.state.params;
         console.log('id', id);
         this.socket.on(`device_${id}_state`, (data) => {
-            console.log(data);
-            let tstr = '{' + data.replace(/\*/g, '\"') + '}';
+            // console.log(data);
+            // let tstr = '{' + data.replace(/\*/g, '\"') + '}';
             // console.log(JSON.parse(tstr));
-            let json = JSON.parse(tstr);
-            console.log(json);
-            if (json.NAME == 'LED') {
-                this.handleLed(json);
-            } else if (json.NAME == 'MOTOR1') {
-                this.handleMotor1(json);
-            } else if (json.NAME == 'MOTOR2') {
-                this.handleMotor2(json);
-            } else if (json.NAME == 'MOTOR3') {
-                this.handleMotor3(json);
-            } else if (json.NAME == 'MOTOR4') {
-                this.handleMotor4(json);
-            } else if (json.NAME == 'PUMP') {
-                this.handlePump(json);
-            } else if (json.NAME == 'VALVE') {
-                this.handleValve(json);
+            // let json = JSON.parse(tstr);
+            console.log(data);
+            if (data.NAME == 'LED') {
+                this.handleLed(data);
+            } else if (data.NAME == 'MOTOR1') {
+                this.handleMotor1(data);
+            } else if (data.NAME == 'MOTOR2') {
+                this.handleMotor2(data);
+            } else if (data.NAME == 'MOTOR3') {
+                this.handleMotor3(data);
+            } else if (data.NAME == 'MOTOR4') {
+                this.handleMotor4(data);
+            } else if (data.NAME == 'PUMP') {
+                this.handlePump(data);
+            } else if (data.NAME == 'VALVE') {
+                this.handleValve(data);
             } else {
-                this.handleData(json);
+                this.handleData(data);
             }
         });
     }
@@ -144,7 +154,7 @@ class Detail extends Component {
             'data': {
                 "Header": "S",
                 "Command": "1",
-                "time": "10:56:29",
+                "time": new Date().getTime(),
             }
         });
     }
@@ -158,7 +168,7 @@ class Detail extends Component {
             'data': {
                 "Header": "S",
                 "Command": "2",
-                "time": "10:56:29",
+                "time": new Date().getTime(),
             }
         });
     }
@@ -172,7 +182,7 @@ class Detail extends Component {
             'data': {
                 "Header": "S",
                 "Command": "4",
-                "time": "10:56:29",
+                "time": new Date().getTime(),
             }
         });
     }
@@ -186,7 +196,7 @@ class Detail extends Component {
             'data': {
                 "Header": "S",
                 "Command": "8",
-                "time": "10:56:29",
+                "time": new Date().getTime(),
             }
         });
     }
@@ -200,7 +210,7 @@ class Detail extends Component {
             'data': {
                 "Header": "S",
                 "Command": "64",
-                "time": "10:56:29",
+                "time": new Date().getTime(),
             }
         });
     }
@@ -214,7 +224,7 @@ class Detail extends Component {
             'data': {
                 "Header": "S",
                 "Command": "16",
-                "time": "10:56:29",
+                "time": new Date().getTime(),
             }
         });
     }
@@ -228,7 +238,48 @@ class Detail extends Component {
             'data': {
                 "Header": "S",
                 "Command": "32",
-                "time": "10:56:29",
+                "time": new Date().getTime(),
+            }
+        });
+    }
+
+    sendChangeCai = () => {
+        this.socket.emit('change_device_state', {
+            'device_id': this.props.navigation.state.params.id,
+            'data': {
+                "Header": "S",
+                "Command": "100",
+                "time": new Date().getTime(),
+            }
+        });
+    }
+    sendChangeMuong = () => {
+        this.socket.emit('change_device_state', {
+            'device_id': this.props.navigation.state.params.id,
+            'data': {
+                "Header": "S",
+                "Command": "101",
+                "time": new Date().getTime(),
+            }
+        });
+    }
+    sendChangeCan = () => {
+        this.socket.emit('change_device_state', {
+            'device_id': this.props.navigation.state.params.id,
+            'data': {
+                "Header": "S",
+                "Command": "102",
+                "time": new Date().getTime(),
+            }
+        });
+    }
+    sendChangeFake = () => {
+        this.socket.emit('change_device_state', {
+            'device_id': this.props.navigation.state.params.id,
+            'data': {
+                "Header": "S",
+                "Command": "103",
+                "time": new Date().getTime(),
             }
         });
     }
@@ -238,6 +289,29 @@ class Detail extends Component {
         let space = ' ';
         return (
             <View style={{ flex: 1, backgroundColor: '#CACACA' }}>
+                <Modal
+                    animationType='fade'
+                    transparent={true}
+
+                    visible={this.state.modalVisible}
+                    onRequestClose={() => { alert("Modal has been closed.") }}
+                >
+                    <View style={{ flex: 1, backgroundColor: 'rgba(255, 255, 255, 0.6)' }}>
+                        <View style={{ width: 2 * width / 3, height: 2 * height / 5, alignSelf: 'center', backgroundColor: 'white', marginTop: 3 * height / 10 }}>
+                            <Text style={{ alignSelf: 'center', flex: 0.2, fontSize: 25 }}>Trồng rau mới</Text>
+                            <View style={{ backgroundColor: 'blue', flex: 0.6 }}></View>
+                            <TouchableOpacity style={{ flex: 0.2, alignItems: 'center' }}>
+                                <Text>Đồng ý</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={{ position: 'absolute', top: 5, right: 5 }} onPress={() => {
+                                this.setModalVisible(!this.state.modalVisible)
+                            }}>
+                                <Icon1 name='cancel' color='red' size={25} />
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+
+                </Modal>
                 <ScrollView style={{ flex: 1, margin: 8, backgroundColor: 'white' }}>
                     <Text style={{ fontFamily: 'Cochin', paddingTop: 10, paddingLeft: 10, paddingRight: 10, paddingBottom: 25 }}>
                         <Text style={{ color: '#CACACA', fontSize: 14 }} >
@@ -247,11 +321,31 @@ class Detail extends Component {
                             {this.props.navigation.state.params.sensorId}
                         </Text>
                     </Text>
+                    {/* <TouchableOpacity onPress={() => {
+                        this.sendChangeCai();
+                    }}>
+                        <Text>Rau cải</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => {
+                        this.sendChangeMuong();
+                    }}>
+                        <Text>Rau muống</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => {
+                        this.sendChangeCan();
+                    }}>
+                        <Text>Rau cần</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => {
+                        this.sendChangeFake();
+                    }}>
+                        <Text>Rau fake</Text>
+                    </TouchableOpacity> */}
 
                     <View style={{ marginTop: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
                         <View style={{ borderWidth: 1, borderColor: '#CACACA', justifyContent: 'space-between', width: width / 3 - 6, height: width / 3 - 6, padding: 2 }}>
                             <View style={{ justifyContent: 'space-between', flexDirection: 'row' }}>
-                                <Text style={{ fontFamily: 'Cochin', fontSize: width / 12, color: '#388E3C', marginLeft: width/15 }}>{this.state.data.TEMPERATURE}</Text>
+                                <Text style={{ fontFamily: 'Cochin', fontSize: width / 12, color: '#388E3C', marginLeft: width / 15 }}>{this.state.data.TEMPERATURE}</Text>
                                 <Icon name='ios-thermometer' size={width / 9} color='#388E3C' />
                             </View>
                             <Text style={{ fontFamily: 'Cochin', fontSize: width / 25 }}>°C</Text>
@@ -260,7 +354,7 @@ class Detail extends Component {
                         </View>
                         <View style={{ borderWidth: 1, borderColor: '#CACACA', justifyContent: 'space-between', width: width / 3 - 6, height: width / 3 - 6, padding: 2 }}>
                             <View style={{ justifyContent: 'space-between', flexDirection: 'row' }}>
-                                <Text style={{ fontFamily: 'Cochin', fontSize: width / 12, color: '#388E3C', marginLeft: width/15 }}>{this.state.data.HUMIDITY}</Text>
+                                <Text style={{ fontFamily: 'Cochin', fontSize: width / 12, color: '#388E3C', marginLeft: width / 15 }}>{this.state.data.HUMIDITY}</Text>
                                 <Image style={{ width: width / 9, height: width / 9, resizeMode: 'stretch' }} source={require('../../../img/humidity.png')} />
                             </View>
                             <Text style={{ fontFamily: 'Cochin', fontSize: width / 25 }}>%</Text>
@@ -269,7 +363,7 @@ class Detail extends Component {
                         </View>
                         <View style={{ borderWidth: 1, borderColor: '#CACACA', justifyContent: 'space-between', width: width / 3 - 6, height: width / 3 - 6, padding: 2 }}>
                             <View style={{ justifyContent: 'space-between', flexDirection: 'row' }}>
-                                <Text style={{ fontFamily: 'Cochin', fontSize: width / 12, color: '#388E3C', marginLeft: width/15 }}>{this.state.data.pH}</Text>
+                                <Text style={{ fontFamily: 'Cochin', fontSize: width / 12, color: '#388E3C', marginLeft: width / 15 }}>{this.state.data.pH}</Text>
                                 <Image style={{ width: width / 9, height: width / 9, resizeMode: 'stretch' }} source={require('../../../img/pH.jpg')} />
                             </View>
                             <Text style={{ fontFamily: 'Cochin', fontSize: width / 25 }}>°</Text>
@@ -280,7 +374,7 @@ class Detail extends Component {
                     <View style={{ marginTop: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
                         <View style={{ borderWidth: 1, borderColor: '#CACACA', justifyContent: 'space-between', width: width / 3 - 6, height: width / 3 - 6, padding: 2 }}>
                             <View style={{ justifyContent: 'space-between', flexDirection: 'row' }}>
-                                <Text style={{ fontFamily: 'Cochin', fontSize: width / 12, color: '#388E3C', marginLeft: width/15 }}>{this.state.data.EC}</Text>
+                                <Text style={{ fontFamily: 'Cochin', fontSize: width / 12, color: '#388E3C', marginLeft: width / 15 }}>{this.state.data.EC}</Text>
                                 <Image style={{ width: width / 9, height: width / 9, resizeMode: 'stretch' }} source={require('../../../img/bolt.png')} />
                             </View>
                             <Text style={{ fontFamily: 'Cochin', fontSize: width / 25 }}>mS/cm</Text>
@@ -289,7 +383,7 @@ class Detail extends Component {
                         </View>
                         <View style={{ borderWidth: 1, borderColor: '#CACACA', justifyContent: 'space-between', width: width / 3 - 6, height: width / 3 - 6, padding: 2 }}>
                             <View style={{ justifyContent: 'space-between', flexDirection: 'row' }}>
-                                <Text style={{ fontFamily: 'Cochin', fontSize: width / 12, color: '#388E3C', marginLeft: width/15 }}>{this.state.data.LUX}</Text>
+                                <Text style={{ fontFamily: 'Cochin', fontSize: width / 12, color: '#388E3C', marginLeft: width / 15 }}>{this.state.data.LUX}</Text>
                                 <Image style={{ width: width / 9, height: width / 9, resizeMode: 'stretch' }} source={require('../../../img/sun.png')} />
                             </View>
                             <Text style={{ fontFamily: 'Cochin', fontSize: width / 25 }}>Cd</Text>

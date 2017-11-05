@@ -43,6 +43,10 @@ class Account extends Component {
     componentWillMount() {
     }
 
+    // componentDidMount() {
+    //     console.log(new Date().getTime().toLocaleString());
+    // }
+
     componentWillReceiveProps(nextProps) {
         if (!nextProps.loggedIn.loggedIn) {
             this.setState({
@@ -136,7 +140,7 @@ const styles = {
     textbox: {
         backgroundColor: 'transparent',
         borderBottomWidth: 2,
-        borderBottomColor: '#fff',
+        borderBottomColor: '#f68838',
         color: '#1F4491',
         marginBottom: 18,
         paddingBottom: 3,
