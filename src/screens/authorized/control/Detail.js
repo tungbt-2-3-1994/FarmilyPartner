@@ -22,6 +22,8 @@ const SOCKET_URL = 'http://farm.ongnhuahdpe.com:3000';
 
 const { width, height } = Dimensions.get('window');
 
+const vegetables = ['Rau cải', 'Rau muống', 'Rau cần', 'Rau fake'];
+
 class Detail extends Component {
     static navigationOptions = {
         headerStyle: {
@@ -112,6 +114,7 @@ class Detail extends Component {
         console.log('{}', typeof {});
         let { id } = this.props.navigation.state.params;
         console.log('id', id);
+        // this.socket.emit('get_device_state', id);
         this.socket.on(`device_${id}_state`, (data) => {
             // console.log(data);
             // let tstr = '{' + data.replace(/\*/g, '\"') + '}';
@@ -243,45 +246,53 @@ class Detail extends Component {
         });
     }
 
-    sendChangeCai = () => {
-        this.socket.emit('change_device_state', {
-            'device_id': this.props.navigation.state.params.id,
-            'data': {
-                "Header": "S",
-                "Command": "100",
-                "time": new Date().getTime(),
+    changeVeget = (index) => {
+        if (index == 0) {
+            console.log('asas');
+            sendChangeCai = () => {
+                this.socket.emit('change_device_state', {
+                    'device_id': this.props.navigation.state.params.id,
+                    'data': {
+                        "Header": "S",
+                        "Command": "100",
+                        "time": new Date().getTime(),
+                    }
+                });
             }
-        });
-    }
-    sendChangeMuong = () => {
-        this.socket.emit('change_device_state', {
-            'device_id': this.props.navigation.state.params.id,
-            'data': {
-                "Header": "S",
-                "Command": "101",
-                "time": new Date().getTime(),
+        } else if (index == 1) {
+            sendChangeMuong = () => {
+                this.socket.emit('change_device_state', {
+                    'device_id': this.props.navigation.state.params.id,
+                    'data': {
+                        "Header": "S",
+                        "Command": "101",
+                        "time": new Date().getTime(),
+                    }
+                });
             }
-        });
-    }
-    sendChangeCan = () => {
-        this.socket.emit('change_device_state', {
-            'device_id': this.props.navigation.state.params.id,
-            'data': {
-                "Header": "S",
-                "Command": "102",
-                "time": new Date().getTime(),
+        } else if (index == 2) {
+            sendChangeCan = () => {
+                this.socket.emit('change_device_state', {
+                    'device_id': this.props.navigation.state.params.id,
+                    'data': {
+                        "Header": "S",
+                        "Command": "102",
+                        "time": new Date().getTime(),
+                    }
+                });
             }
-        });
-    }
-    sendChangeFake = () => {
-        this.socket.emit('change_device_state', {
-            'device_id': this.props.navigation.state.params.id,
-            'data': {
-                "Header": "S",
-                "Command": "103",
-                "time": new Date().getTime(),
+        } else {
+            sendChangeFake = () => {
+                this.socket.emit('change_device_state', {
+                    'device_id': this.props.navigation.state.params.id,
+                    'data': {
+                        "Header": "S",
+                        "Command": "103",
+                        "time": new Date().getTime(),
+                    }
+                });
             }
-        });
+        }
     }
 
     render() {
@@ -296,17 +307,24 @@ class Detail extends Component {
                     visible={this.state.modalVisible}
                     onRequestClose={() => { alert("Modal has been closed.") }}
                 >
-                    <View style={{ flex: 1, backgroundColor: 'rgba(255, 255, 255, 0.6)' }}>
-                        <View style={{ width: 2 * width / 3, height: 2 * height / 5, alignSelf: 'center', backgroundColor: 'white', marginTop: 3 * height / 10 }}>
-                            <Text style={{ alignSelf: 'center', flex: 0.2, fontSize: 25 }}>Trồng rau mới</Text>
-                            <View style={{ backgroundColor: 'blue', flex: 0.6 }}></View>
-                            <TouchableOpacity style={{ flex: 0.2, alignItems: 'center' }}>
-                                <Text>Đồng ý</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={{ position: 'absolute', top: 5, right: 5 }} onPress={() => {
+                    <View style={{ flex: 1, backgroundColor: 'rgba(10, 90, 22, 0.5)' }}>
+                        <View style={{ width: 3 * width / 4, height: 2 * height / 5, alignSelf: 'center', backgroundColor: 'white', marginTop: 3 * height / 10 }}>
+                            <View style={{ flex: 0.2, alignItems: 'center', justifyContent: 'center', backgroundColor: '#388E3C' }}>
+                                <Text style={{ color: 'white', fontSize: width / 12 }}>Trồng rau mới</Text>
+                            </View>
+
+                            <ScrollView style={{ flex: 0.8 }}>
+                                {vegetables.map((veget, i) => {
+                                    return (
+                                        <TouchableOpacity onPress={() => this.changeVeget(i)} key={i} style={{ alignItems: 'center', marginTop: 5, borderBottomWidth: 1, borderColor: '#269D83', marginLeft: 0 }}>
+                                            <Text style={{ paddingTop: 2, paddingBottom: 2, fontSize: width / 15 }}>{veget}</Text>
+                                        </TouchableOpacity>);
+                                })}
+                            </ScrollView>
+                            <TouchableOpacity style={{ position: 'absolute', top: 5, right: 5, backgroundColor: '#388E3C' }} onPress={() => {
                                 this.setModalVisible(!this.state.modalVisible)
                             }}>
-                                <Icon1 name='cancel' color='red' size={25} />
+                                <Icon1 name='cancel' color='#D53343' size={30} />
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -321,26 +339,6 @@ class Detail extends Component {
                             {this.props.navigation.state.params.sensorId}
                         </Text>
                     </Text>
-                    {/* <TouchableOpacity onPress={() => {
-                        this.sendChangeCai();
-                    }}>
-                        <Text>Rau cải</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() => {
-                        this.sendChangeMuong();
-                    }}>
-                        <Text>Rau muống</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() => {
-                        this.sendChangeCan();
-                    }}>
-                        <Text>Rau cần</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() => {
-                        this.sendChangeFake();
-                    }}>
-                        <Text>Rau fake</Text>
-                    </TouchableOpacity> */}
 
                     <View style={{ marginTop: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
                         <View style={{ borderWidth: 1, borderColor: '#CACACA', justifyContent: 'space-between', width: width / 3 - 6, height: width / 3 - 6, padding: 2 }}>
