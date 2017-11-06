@@ -249,7 +249,7 @@ class Detail extends Component {
 
     changeVeget = (index) => {
         if (index == 0) {
-            console.log('asas');
+            this.setState({ modalVisible: false });
             sendChangeCai = () => {
                 this.socket.emit('change_device_state', {
                     'device_id': this.props.navigation.state.params.id,
@@ -261,6 +261,7 @@ class Detail extends Component {
                 });
             }
         } else if (index == 1) {
+            this.setState({ modalVisible: false });
             sendChangeMuong = () => {
                 this.socket.emit('change_device_state', {
                     'device_id': this.props.navigation.state.params.id,
@@ -272,6 +273,7 @@ class Detail extends Component {
                 });
             }
         } else if (index == 2) {
+            this.setState({ modalVisible: false });
             sendChangeCan = () => {
                 this.socket.emit('change_device_state', {
                     'device_id': this.props.navigation.state.params.id,
@@ -283,6 +285,7 @@ class Detail extends Component {
                 });
             }
         } else {
+            this.setState({ modalVisible: false });
             sendChangeFake = () => {
                 this.socket.emit('change_device_state', {
                     'device_id': this.props.navigation.state.params.id,
@@ -317,7 +320,10 @@ class Detail extends Component {
                             <ScrollView style={{ flex: 0.8 }}>
                                 {vegetables.map((veget, i) => {
                                     return (
-                                        <TouchableOpacity onPress={() => this.changeVeget(i)} key={i} style={{ alignItems: 'center', marginTop: 5, borderBottomWidth: 1, borderColor: '#269D83', marginLeft: 0 }}>
+                                        <TouchableOpacity onPress={() => {
+                                            this.changeVeget(i)
+                                            {/* console.log('index', i); */}
+                                        }} key={i} style={{ alignItems: 'center', marginTop: 5, borderBottomWidth: 1, borderColor: '#269D83', marginLeft: 0 }}>
                                             <Text style={{ paddingTop: 2, paddingBottom: 2, fontSize: width / 15 }}>{veget}</Text>
                                         </TouchableOpacity>);
                                 })}
