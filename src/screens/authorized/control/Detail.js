@@ -58,6 +58,7 @@ class Detail extends Component {
         e = this;
         this.socket = io.connect(SOCKET_URL, { config });
         this.socket.emit('authenticate', { 'token': this.props.user.auth_token });
+        this.socket.emit('get_device_state', this.props.navigation.state.params.id);
     }
 
     componentWillUnmount() {
@@ -115,7 +116,7 @@ class Detail extends Component {
         console.log('{}', typeof {});
         let { id } = this.props.navigation.state.params;
         console.log('id', id);
-        // this.socket.emit('get_device_state', id);
+
         this.socket.on(`device_${id}_state`, (data) => {
             // console.log(data);
             // let tstr = '{' + data.replace(/\*/g, '\"') + '}';
@@ -307,14 +308,13 @@ class Detail extends Component {
                 <Modal
                     animationType='fade'
                     transparent={true}
-
                     visible={this.state.modalVisible}
                     onRequestClose={() => { alert("Modal has been closed.") }}
                 >
                     <View style={{ flex: 1, backgroundColor: 'rgba(10, 90, 22, 0.5)' }}>
                         <View style={{ width: 3 * width / 4, height: 2 * height / 5, alignSelf: 'center', backgroundColor: 'white', marginTop: 3 * height / 10 }}>
                             <View style={{ flex: 0.2, alignItems: 'center', justifyContent: 'center', backgroundColor: '#388E3C' }}>
-                                <Text style={{ color: 'white', fontSize: width / 12 }}>Trồng rau mới</Text>
+                                <Text style={{ color: 'white', fontSize: width / 12 }}>Chọn loại rau</Text>
                             </View>
 
                             <ScrollView style={{ flex: 0.8 }}>
@@ -322,7 +322,7 @@ class Detail extends Component {
                                     return (
                                         <TouchableOpacity onPress={() => {
                                             this.changeVeget(i)
-                                            {/* console.log('index', i); */}
+                                            {/* console.log('index', i); */ }
                                         }} key={i} style={{ alignItems: 'center', marginTop: 5, borderBottomWidth: 1, borderColor: '#269D83', marginLeft: 0 }}>
                                             <Text style={{ paddingTop: 2, paddingBottom: 2, fontSize: width / 15 }}>{veget}</Text>
                                         </TouchableOpacity>);
