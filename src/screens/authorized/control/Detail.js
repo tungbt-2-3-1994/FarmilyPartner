@@ -5,6 +5,7 @@ import {
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Icon1 from 'react-native-vector-icons/MaterialIcons';
+import Icon2 from 'react-native-vector-icons/FontAwesome';
 
 import io from 'socket.io-client/dist/socket.io';
 
@@ -32,7 +33,7 @@ class Detail extends Component {
         headerBackTitle: null,
         headerTintColor: 'white',
         headerTitleStyle: { color: 'white', fontFamily: 'Baskerville-BoldItalic', fontSize: 20 },
-        headerRight: <TouchableOpacity style={{ marginRight: 5 }} onPress={() => { e.setModalVisible(true) }}><Icon1 size={20} color='white' name='shopping-cart' /></TouchableOpacity>
+        headerRight: <TouchableOpacity style={{ marginRight: 5 }} onPress={() => { e.setModalVisible(true) }}><Icon2 size={20} color='white' name='exchange' /></TouchableOpacity>
     }
 
     state = {
