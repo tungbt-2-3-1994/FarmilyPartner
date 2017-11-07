@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-    AsyncStorage, Dimensions, Switch, View, Text, Image, Button, ActivityIndicator, TouchableOpacity, TextInput, ScrollView, Alert, Modal
+    AsyncStorage, Dimensions, Switch, View, Text, Image, Button, ActivityIndicator, TouchableOpacity, TextInput, ScrollView, Alert, Modal, Platform
 } from 'react-native';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -310,7 +310,7 @@ class Detail extends Component {
             await AsyncStorage.setItem('MOTOR2', JSON.stringify(this.state.motor2Data));
             await AsyncStorage.setItem('MOTOR3', JSON.stringify(this.state.motor3Data));
             await AsyncStorage.setItem('MOTOR4', JSON.stringify(this.state.motor4Data));
-            // console.log('save', this.state.ledData);
+            console.log('save', this.state.ledData);
         } catch (e) {
             console.log(e);
         }
@@ -318,34 +318,45 @@ class Detail extends Component {
 
     get = async () => {
         try {
-            let led = await AsyncStorage.getItem('LED') || 0;
-            let pump = await AsyncStorage.getItem('PUMP') || 0;
-            let valve = await AsyncStorage.getItem('VALVE') || 0;
-            let motor1 = await AsyncStorage.getItem('MOTOR1') || 0;
-            let motor2 = await AsyncStorage.getItem('MOTOR2') || 0;
-            let motor3 = await AsyncStorage.getItem('MOTOR3') || 0;
-            let motor4 = await AsyncStorage.getItem('MOTOR4') || 0;
-            // console.log('asas', led);
+            var mled, mpump, mvalve, mmotor1, mmotor2, mmotor4, mmotor3;
+            if (Platform.OS == 'android') {
+                mled = await AsyncStorage.getItem('LED') || 0;
+                mpump = await AsyncStorage.getItem('PUMP') || 0;
+                mvalve = await AsyncStorage.getItem('VALVE') || 0;
+                mmotor1 = await AsyncStorage.getItem('MOTOR1') || 0;
+                mmotor2 = await AsyncStorage.getItem('MOTOR2') || 0;
+                mmotor3 = await AsyncStorage.getItem('MOTOR3') || 0;
+                mmotor4 = await AsyncStorage.getItem('MOTOR4') || 0;
+            } else if (Platform.OS == 'ios') {
+                mled = await AsyncStorage.getItem('LED');
+                mpump = await AsyncStorage.getItem('PUMP');
+                mvalve = await AsyncStorage.getItem('VALVE');
+                mmotor1 = await AsyncStorage.getItem('MOTOR1');
+                mmotor2 = await AsyncStorage.getItem('MOTOR2');
+                mmotor3 = await AsyncStorage.getItem('MOTOR3');
+                mmotor4 = await AsyncStorage.getItem('MOTOR4');
+            }
+            console.log('asas', mmotor2);
             this.setState({
-                ledData: JSON.parse(led)
+                ledData: JSON.parse(mled)
             });
             this.setState({
-                pumpData: JSON.parse(pump)
+                pumpData: JSON.parse(mpump)
             });
             this.setState({
-                valveData: JSON.parse(valve)
+                valveData: JSON.parse(mvalve)
             });
             this.setState({
-                motor1Data: JSON.parse(motor1)
+                motor1Data: JSON.parse(mmotor1)
             });
             this.setState({
-                motor2Data: JSON.parse(motor2)
+                motor2Data: JSON.parse(mmotor2)
             });
             this.setState({
-                motor3Data: JSON.parse(motor3)
+                motor3Data: JSON.parse(mmotor3)
             });
             this.setState({
-                motor4Data: JSON.parse(motor4)
+                motor4Data: JSON.parse(mmotor4)
             });
 
         } catch (e) {
