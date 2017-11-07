@@ -100,7 +100,7 @@ class DetailStore extends Component {
                     renderStickyHeader={this.renderStickyHeader.bind(this)}
                 >
                     <View style={styles.container}>
-                        <View style={{ backgroundColor: '#FFFFFF', marginTop: 5 }}>
+                        <View style={{ backgroundColor: '#FFFFFF', marginTop: 5, marginBottom: 5, padding: 10 }}>
                             <Text style={styles.text}>Thông tin cửa hàng</Text>
                             <Infor infor={marker.address} icon='location-on' />
                             <Infor infor={marker.info} icon='info-outline' />
@@ -113,12 +113,12 @@ class DetailStore extends Component {
                                 data={this.props.detailStore.vegetables}
                                 renderItem={({ item }) => (
                                     <TouchableOpacity style={styles.flatItem}>
-                                        {/* {item.images.length !== 0 ?
-                                            <Image source={{ uri: item.images[0] }} style={styles.flatItemFood} />
+                                        {item.images.length !== 0 ?
+                                            <Image source={{ uri: 'http://farm.ongnhuahdpe.com' + item.images[0].src }} style={styles.flatItemFood} />
                                             :
                                             <Image source={require('../../../img/noImage.jpg')} style={styles.flatItemFood} />
-                                        } */}
-                                        <Image source={require('../../../img/noImage.jpg')} style={styles.flatItemFood} />
+                                        }
+                                        {/* <Image source={require('../../../img/noImage.jpg')} style={styles.flatItemFood} /> */}
                                         <View style={{ position: 'absolute', bottom: 0, left: 0, right: 0, backgroundColor: 'rgba(52, 52, 52, 0.1)' }}>
                                             <Text style={{ margin: 2, textAlign: 'center', color: '#319C46', fontFamily: 'BodoniSvtyTwoOSITCTT-Bold' }}>{item.name}</Text>
                                         </View>
@@ -143,7 +143,7 @@ const styles = {
         backgroundColor: '#DEDEDE'
     },
     text: {
-        marginTop: 5,
+        paddingTop: 10,
         fontSize: 18,
         fontWeight: 'bold',
         marginLeft: 10,

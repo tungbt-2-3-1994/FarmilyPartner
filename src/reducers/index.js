@@ -7,13 +7,13 @@ import SearchBox from './SearchBox';
 import StoreBySearch from './StoreBySearch';
 import DetailStore from './StoreById';
 import Device from './Device';
+import ActiveOrder from './ActiveOrder';
 
 export default combineReducers({
     nav: Navigation,
     userInfor: UserInfor,
     partner: Device,
     store: Store,
-    // searchBox: SearchBox,
-    // storeBySearch: StoreBySearch,
+    activeOrder: ActiveOrder,
     detailStore: DetailStore
 });

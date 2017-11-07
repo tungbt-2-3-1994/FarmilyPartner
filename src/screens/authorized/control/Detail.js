@@ -23,7 +23,7 @@ const SOCKET_URL = 'http://farm.ongnhuahdpe.com:3000';
 
 const { width, height } = Dimensions.get('window');
 
-const vegetables = ['Rau cải', 'Rau muống', 'Rau cần', 'Rau fake'];
+const vegetables = ['Xà lách tím', 'Xà lách xoăn', 'Cải bó xôi', 'Cải cầu vồng'];
 
 class Detail extends Component {
     static navigationOptions = {
@@ -117,6 +117,7 @@ class Detail extends Component {
         this.getCurrentVeget();
         let { id } = this.props.navigation.state.params;
         this.socket.on(`device_${id}_state`, (data) => {
+            console.log('data', data);
             // let tstr = '{' + data.replace(/\*/g, '\"') + '}';
             // console.log(JSON.parse(tstr));
             // let json = JSON.parse(tstr);

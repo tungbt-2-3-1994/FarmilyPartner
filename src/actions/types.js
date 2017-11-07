@@ -25,4 +25,9 @@ export const UNTOGGLE_SEARCH = 'UNTOGGLE_SEARCH';
  */
 export const GET_ALL_DEVICES = 'GET_ALL_DEVICES';
 
+/**
+ * ORDER
+ */
+export const GET_ACTIVE_ORDER = 'GET_ACTIVE_ORDER';
+
 

@@ -28,7 +28,8 @@ const styles = {
         paddingTop: 10
     },
     text: {
-        paddingLeft: 10
+        paddingLeft: 10,
+        paddingRight: 10
     }
 }
 

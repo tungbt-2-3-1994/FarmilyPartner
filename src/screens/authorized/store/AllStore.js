@@ -12,7 +12,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import { CalloutItem } from '../../../components/StoreMap/Callout';
 
-import { getAllStores } from '../../../actions';
+import { getAllStores, getActiveOrder } from '../../../actions';
 
 const { width, height } = Dimensions.get('window');
 
@@ -45,14 +45,17 @@ class AllStore extends Component {
             },
             markers: [],
             animating: true,
+            currentOrder: []
         }
         // this._handleConnectionChange = this._handleConnectionChange.bind(this);
     }
 
     componentWillMount() {
-        console.log('asas', this.props.user.user.user.id);
+        // console.log('asas', this.props.user.user.user.id);
         this.props.getAllStores();
     }
+
+
 
     componentWillReceiveProps(nextProps) {
         this.setState({
@@ -63,11 +66,20 @@ class AllStore extends Component {
                 markers: nextProps.stores
             });
         }
+        if (nextProps.orderLoading == false) {
+            if (nextProps.activeOrder.data.length != 0) {
+                Alert.alert('YES');
+            }
+        }
+
     }
 
-    // componentDidMount() {
-    //     NetInfo.isConnected.addEventListener('change', this._handleConnectionChange);
-    // }
+    componentDidMount() {
+        // setInterval(() => {
+        //     this.props.getActiveOrder();
+        // }, 5000);
+        // NetInfo.isConnected.addEventListener('change', this._handleConnectionChange);
+    }
 
     // componentWillUnmount() {
     //     NetInfo.isConnected.removeEventListener('change', this._handleConnectionChange);
@@ -144,12 +156,14 @@ const styles = {
 };
 
 const mapStateToProps = (state) => {
-    // console.log('state', state);
+    console.log('state', state.data);
     return ({
         user: state.userInfor,
         stores: state.store.stores,
         loadingStores: state.store.loading,
+        activeOrder: state.activeOrder.activeOrder,
+        orderLoading: state.activeOrder.loading
     });
 }
 
-export default connect(mapStateToProps, { getAllStores })(AllStore);
+export default connect(mapStateToProps, { getAllStores, getActiveOrder })(AllStore);
