@@ -43,6 +43,8 @@ class AllStore extends Component {
                 latitudeDelta: 0.15,
                 longitudeDelta: 0.15
             },
+            markers: [],
+            animating: true,
         }
         // this._handleConnectionChange = this._handleConnectionChange.bind(this);
     }
@@ -80,27 +82,27 @@ class AllStore extends Component {
     //     }
     // }
 
-    // componentWillReceiveProps(nextProps) {
-    //     this.setState({
-    //         animating: nextProps.loadingStores.loading,
-    //     });
-    //     // if (nextProps.loadingGeo == false) {
-    //     //     var { coords } = nextProps.userInfor;
-    //     //     this.setState({
-    //     //         region: {
-    //     //             latitude: coords.latitude,
-    //     //             longitude: coords.longitude,
-    //     //             latitudeDelta: LATITUDE_DELTA,
-    //     //             longitudeDelta: LONGITUDE_DELTA
-    //     //         }
-    //     //     });
-    //     // }
-    //     // if (nextProps.loadingStores.loading == false) {
-    //     //     this.setState({
-    //     //         markers: nextProps.stores
-    //     //     });
-    //     // }
-    // }
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            animating: nextProps.loadingStores.loading,
+        });
+        // if (nextProps.loadingGeo == false) {
+        //     var { coords } = nextProps.userInfor;
+        //     this.setState({
+        //         region: {
+        //             latitude: coords.latitude,
+        //             longitude: coords.longitude,
+        //             latitudeDelta: LATITUDE_DELTA,
+        //             longitudeDelta: LONGITUDE_DELTA
+        //         }
+        //     });
+        // }
+        if (nextProps.loadingStores == false) {
+            this.setState({
+                markers: nextProps.stores
+            });
+        }
+    }
 
     // componentDidMount() {
     //     NetInfo.isConnected.addEventListener('change', this._handleConnectionChange);
@@ -118,7 +120,7 @@ class AllStore extends Component {
     renderMakers() {
         markers = [];
         this.state.markers.map((marker) => {
-            var latlng = {
+            let latlng = {
                 'latitude': marker.latitude,
                 'longitude': marker.longitude
             }
@@ -239,8 +241,14 @@ class AllStore extends Component {
                     provider={PROVIDER_GOOGLE}
                     initialRegion={this.state.region}
                     style={{ position: 'absolute', left: 0, right: 0, top: 0, bottom: 0 }}>
-                    {/* {this.renderMakers()} */}
+                    {/* {this.props.loadingStores == false && this.renderMakers()} */}
                 </MapView>
+                {this.state.animating &&
+                    < ActivityIndicator
+                        size='large'
+                        color='red'
+                        style={styles.activityIndicator}
+                    />}
                 {/* {!this.props.isConnected.isConnected &&
                     <View style={styles.activityIndicator}>
                         <Text>Loading</Text>
@@ -294,8 +302,8 @@ const mapStateToProps = (state) => {
     console.log('state', state);
     return ({
         user: state.userInfor,
-        // stores: state.store.stores,
-        // loadingStores: state.store,
+        stores: state.store.stores,
+        loadingStores: state.store.loading,
     });
 }
 

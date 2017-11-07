@@ -318,13 +318,13 @@ class Detail extends Component {
 
     get = async () => {
         try {
-            let led = await AsyncStorage.getItem('LED');
-            let pump = await AsyncStorage.getItem('PUMP');
-            let valve = await AsyncStorage.getItem('VALVE');
-            let motor1 = await AsyncStorage.getItem('MOTOR1');
-            let motor2 = await AsyncStorage.getItem('MOTOR2');
-            let motor3 = await AsyncStorage.getItem('MOTOR3');
-            let motor4 = await AsyncStorage.getItem('MOTOR4');
+            let led = await AsyncStorage.getItem('LED') || 0;
+            let pump = await AsyncStorage.getItem('PUMP') || 0;
+            let valve = await AsyncStorage.getItem('VALVE') || 0;
+            let motor1 = await AsyncStorage.getItem('MOTOR1') || 0;
+            let motor2 = await AsyncStorage.getItem('MOTOR2') || 0;
+            let motor3 = await AsyncStorage.getItem('MOTOR3') || 0;
+            let motor4 = await AsyncStorage.getItem('MOTOR4') || 0;
             // console.log('asas', led);
             this.setState({
                 ledData: JSON.parse(led)
@@ -365,7 +365,7 @@ class Detail extends Component {
     }
     getCurrentVeget = async () => {
         try {
-            let currentVeget = await AsyncStorage.getItem('CURRENT_VEGET');
+            let currentVeget = await AsyncStorage.getItem('CURRENT_VEGET') || vegetables[0];
             this.setState({
                 currentVeget: currentVeget
             });

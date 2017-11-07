@@ -1,4 +1,4 @@
-import { GET_ALL_STORES, FETCH_STORE_BY_ID, FAIL_TO_GET_STORES } from '../actions/types';
+import { GET_ALL_STORES, FETCH_STORE_BY_ID, FAIL_TO_GET_STORES, LOGOUT } from '../actions/types';
 
 const INITIAL = {
     loading: true,
@@ -11,6 +11,8 @@ export default (state = INITIAL, action) => {
             return { ...state, loading: false, stores: action.payload };
         case FAIL_TO_GET_STORES:
             return { ...state, loading: false, stores: [] };
+        case LOGOUT:
+            return { ...state, loading: true, stores: [] };
         default:
             return state;
     }

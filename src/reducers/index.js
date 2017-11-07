@@ -12,7 +12,7 @@ export default combineReducers({
     nav: Navigation,
     userInfor: UserInfor,
     partner: Device,
-    // store: Store,
+    store: Store,
     // searchBox: SearchBox,
     // storeBySearch: StoreBySearch,
     // detailStore: DetailStore
