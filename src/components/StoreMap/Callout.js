@@ -13,25 +13,11 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 const CalloutItem = ({ marker }) => {
     return (
         <View style={styles.callout} underlayColor='#dddddd'>
-            {/*<Image style={styles.calloutPhoto} source={marker.photo} />*/}
-            <Image style={styles.calloutPhoto} source={require('../../img/logo.png')} />
             <View style={styles.textInfo}>
-                <Text style={styles.calloutTitle}>{marker.partner.name}</Text>
-                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <Text style={styles.calloutTitle}>{marker.name}</Text>
+                <View style={{ flexDirection: 'row', alignItems: 'center', paddingTop: 5 }}>
                     <Icon name='location-on' />
-                    <Text style={{ marginLeft: 5, fontSize: 10 }}>{marker.address}</Text>
-                </View>
-                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <Icon name='phone' />
-                    <Text style={{ marginLeft: 5, fontSize: 10 }}>{marker.partner.phone_number}</Text>
-                </View>
-                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <Icon name='alarm-on' />
-                    <Text style={{ marginLeft: 5, fontSize: 10 }}>8:00</Text>
-                </View>
-                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <Icon name='alarm-off' />
-                    <Text style={{ marginLeft: 5, fontSize: 10 }}>21:00</Text>
+                    <Text style={{ marginLeft: 5, paddingRight: 5, fontSize: 10 }}>{marker.address}</Text>
                 </View>
             </View>
         </View>
@@ -42,19 +28,8 @@ const CalloutItem = ({ marker }) => {
 
 const styles = {
     callout: {
-        flex: 1,
         justifyContent: 'center',
-        width: 230,
-        height: 130,
-        flexDirection: 'row'
-    },
-    calloutPhoto: {
-        flex: 0.3,
-        width: 60,
-        height: 60,
-        padding: 10,
-        alignSelf: 'center',
-        resizeMode: 'contain',
+        width: 200
     },
     calloutTitle: {
         fontSize: 15,
@@ -65,9 +40,7 @@ const styles = {
     },
     textInfo: {
         flexDirection: 'column',
-        justifyContent: 'space-between',
-        flex: 0.7,
-        padding: 10
+        padding: 5
     },
 };
 
