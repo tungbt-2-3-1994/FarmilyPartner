@@ -38,6 +38,7 @@
 		2DCD954D1E0B4F2C00145EB5 /* FarmilyPartnerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* FarmilyPartnerTests.m */; };
 		3AA7546DE82A4100ACED7F33 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2978BDB091334B64A66D4F3B /* Zocial.ttf */; };
 		42917786FDCD6551BC006552 /* libPods-FarmilyPartner.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EF6824B3CA97876CF60B01E6 /* libPods-FarmilyPartner.a */; };
+		499B086B18264AA09DE77371 /* libRNSVG.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 179E99803FEE41489965B5CC /* libRNSVG.a */; };
 		4B95B0549F504EF3BF797B93 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4FAC1167946C4456BAD4EDC9 /* Foundation.ttf */; };
 		530E28C9CFBB45A8B8E31413 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0C913532CCD544C39C9B53D0 /* Ionicons.ttf */; };
 		57A0469E1B814F22B05E37EE /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 388C15756C6445C7939C402A /* libRNVectorIcons.a */; };
@@ -80,7 +81,6 @@
 		EDAEB43070D449DD80155332 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2DA0A74A606343AE82F48410 /* FontAwesome.ttf */; };
 		EE27856FA1BD4761A01A3CEB /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 901C04F2DF104374ACA3FA27 /* Entypo.ttf */; };
 		F1FA914E421B47F2A7BAA220 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4491760EAC92444AB909A663 /* Zocial.ttf */; };
-		499B086B18264AA09DE77371 /* libRNSVG.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 179E99803FEE41489965B5CC /* libRNSVG.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -342,6 +342,7 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = FarmilyPartner/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = FarmilyPartner/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
+		179E99803FEE41489965B5CC /* libRNSVG.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNSVG.a; sourceTree = "<group>"; };
 		17B15C090B5747818816E493 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		195CE7C5B0F04520884BE0A7 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/native-base/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 		19986A0FC7B24F5EBC35BA2B /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
@@ -407,11 +408,10 @@
 		D92040034115408EAC5EDB6A /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		DDD563D484E94256B716189B /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		E0867396A64E43E489C668E0 /* libAirMaps.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libAirMaps.a; sourceTree = "<group>"; };
+		EC97ADF397BF4DC0982A474B /* RNSVG.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNSVG.xcodeproj; path = "../node_modules/react-native-svg/ios/RNSVG.xcodeproj"; sourceTree = "<group>"; };
 		ECCAF85DC69A40F1A68991E3 /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
 		EF6824B3CA97876CF60B01E6 /* libPods-FarmilyPartner.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FarmilyPartner.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0D5BF924466B8BB261B3261 /* Pods-FarmilyPartner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FarmilyPartner.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FarmilyPartner/Pods-FarmilyPartner.debug.xcconfig"; sourceTree = "<group>"; };
-		EC97ADF397BF4DC0982A474B /* RNSVG.xcodeproj */ = {isa = PBXFileReference; name = "RNSVG.xcodeproj"; path = "../node_modules/react-native-svg/ios/RNSVG.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
-		179E99803FEE41489965B5CC /* libRNSVG.a */ = {isa = PBXFileReference; name = "libRNSVG.a"; path = "libRNSVG.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -708,6 +708,7 @@
 			children = (
 				E0867396A64E43E489C668E0 /* libAirMaps.a */,
 				388C15756C6445C7939C402A /* libRNVectorIcons.a */,
+				179E99803FEE41489965B5CC /* libRNSVG.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";

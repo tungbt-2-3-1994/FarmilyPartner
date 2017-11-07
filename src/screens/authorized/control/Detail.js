@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-    Dimensions, Switch, View, Text, Image, Button, ActivityIndicator, TouchableOpacity, TextInput, ScrollView, Alert, Modal
+    AsyncStorage, Dimensions, Switch, View, Text, Image, Button, ActivityIndicator, TouchableOpacity, TextInput, ScrollView, Alert, Modal
 } from 'react-native';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -47,6 +47,7 @@ class Detail extends Component {
         pumpData: {},
         valveData: {},
         modalVisible: false,
+        currentVeget: ''
     }
 
     setModalVisible(visible) {
@@ -58,13 +59,14 @@ class Detail extends Component {
         e = this;
         this.socket = io.connect(SOCKET_URL, { config });
         this.socket.emit('authenticate', { 'token': this.props.user.auth_token });
-        this.socket.emit('get_device_state', this.props.navigation.state.params.id);
+        // this.socket.emit('get_device_state', this.props.navigation.state.params.id);
     }
 
     componentWillUnmount() {
         let { id } = this.props.navigation.state.params;
         this.socket.removeListener(`device_${id}_state`);
-        console.log('asjasga');
+        // console.log('asjasga');
+        this.save();
     }
 
     handleLed = (ledData) => {
@@ -111,18 +113,13 @@ class Detail extends Component {
     }
 
     componentDidMount() {
-
-        console.log('data', typeof this.state.data);
-        console.log('{}', typeof {});
+        this.get();
+        this.getCurrentVeget();
         let { id } = this.props.navigation.state.params;
-        console.log('id', id);
-
         this.socket.on(`device_${id}_state`, (data) => {
-            // console.log(data);
             // let tstr = '{' + data.replace(/\*/g, '\"') + '}';
             // console.log(JSON.parse(tstr));
             // let json = JSON.parse(tstr);
-            console.log(data);
             if (data.NAME == 'LED') {
                 this.handleLed(data);
             } else if (data.NAME == 'MOTOR1') {
@@ -250,6 +247,7 @@ class Detail extends Component {
 
     changeVeget = (index) => {
         if (index == 0) {
+            this.saveCurrentVeget(0);
             this.setState({ modalVisible: false });
             sendChangeCai = () => {
                 this.socket.emit('change_device_state', {
@@ -262,6 +260,7 @@ class Detail extends Component {
                 });
             }
         } else if (index == 1) {
+            this.saveCurrentVeget(1);
             this.setState({ modalVisible: false });
             sendChangeMuong = () => {
                 this.socket.emit('change_device_state', {
@@ -274,6 +273,7 @@ class Detail extends Component {
                 });
             }
         } else if (index == 2) {
+            this.saveCurrentVeget(2);
             this.setState({ modalVisible: false });
             sendChangeCan = () => {
                 this.socket.emit('change_device_state', {
@@ -286,6 +286,7 @@ class Detail extends Component {
                 });
             }
         } else {
+            this.saveCurrentVeget(3);
             this.setState({ modalVisible: false });
             sendChangeFake = () => {
                 this.socket.emit('change_device_state', {
@@ -299,6 +300,80 @@ class Detail extends Component {
             }
         }
     }
+
+    save = async () => {
+        try {
+            await AsyncStorage.setItem('LED', JSON.stringify(this.state.ledData));
+            await AsyncStorage.setItem('PUMP', JSON.stringify(this.state.pumpData));
+            await AsyncStorage.setItem('VALVE', JSON.stringify(this.state.valveData));
+            await AsyncStorage.setItem('MOTOR1', JSON.stringify(this.state.motor1Data));
+            await AsyncStorage.setItem('MOTOR2', JSON.stringify(this.state.motor2Data));
+            await AsyncStorage.setItem('MOTOR3', JSON.stringify(this.state.motor3Data));
+            await AsyncStorage.setItem('MOTOR4', JSON.stringify(this.state.motor4Data));
+            // console.log('save', this.state.ledData);
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    get = async () => {
+        try {
+            let led = await AsyncStorage.getItem('LED');
+            let pump = await AsyncStorage.getItem('PUMP');
+            let valve = await AsyncStorage.getItem('VALVE');
+            let motor1 = await AsyncStorage.getItem('MOTOR1');
+            let motor2 = await AsyncStorage.getItem('MOTOR2');
+            let motor3 = await AsyncStorage.getItem('MOTOR3');
+            let motor4 = await AsyncStorage.getItem('MOTOR4');
+            // console.log('asas', led);
+            this.setState({
+                ledData: JSON.parse(led)
+            });
+            this.setState({
+                pumpData: JSON.parse(pump)
+            });
+            this.setState({
+                valveData: JSON.parse(valve)
+            });
+            this.setState({
+                motor1Data: JSON.parse(motor1)
+            });
+            this.setState({
+                motor2Data: JSON.parse(motor2)
+            });
+            this.setState({
+                motor3Data: JSON.parse(motor3)
+            });
+            this.setState({
+                motor4Data: JSON.parse(motor4)
+            });
+
+        } catch (e) {
+            console.log('e', e);
+        }
+    }
+
+    saveCurrentVeget = async (i) => {
+        try {
+            await AsyncStorage.setItem('CURRENT_VEGET', vegetables[i]);
+            this.setState({
+                currentVeget: vegetables[i]
+            });
+        } catch (e) {
+            Alert.alert('Lưu rau thất bại');
+        }
+    }
+    getCurrentVeget = async () => {
+        try {
+            let currentVeget = await AsyncStorage.getItem('CURRENT_VEGET');
+            this.setState({
+                currentVeget: currentVeget
+            });
+        } catch (e) {
+            Alert.alert('Load rau thất bại');
+        }
+    }
+
 
     render() {
         // console.log('this', this.state.data);
@@ -338,12 +413,20 @@ class Detail extends Component {
 
                 </Modal>
                 <ScrollView style={{ flex: 1, margin: 8, backgroundColor: 'white' }}>
-                    <Text style={{ fontFamily: 'Cochin', paddingTop: 10, paddingLeft: 10, paddingRight: 10, paddingBottom: 25 }}>
+                    <Text style={{ fontFamily: 'Cochin', paddingTop: 10, paddingLeft: 10, paddingRight: 10 }}>
                         <Text style={{ color: '#CACACA', fontSize: 14 }} >
                             Sensor Box ID: {space}
                         </Text>
                         <Text numberOfLines={2} style={{ fontWeight: 'bold', color: 'black', fontSize: 17 }}>
                             {this.props.navigation.state.params.sensorId}
+                        </Text>
+                    </Text>
+                    <Text style={{ fontFamily: 'Cochin', paddingTop: 10, paddingLeft: 10, paddingRight: 10, paddingBottom: 10 }}>
+                        <Text style={{ color: '#CACACA', fontSize: 14 }} >
+                            Rau đang trồng: {space}
+                        </Text>
+                        <Text numberOfLines={2} style={{ fontWeight: 'bold', color: 'black', fontSize: 17 }}>
+                            {this.state.currentVeget}
                         </Text>
                     </Text>
 

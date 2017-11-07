@@ -16,11 +16,18 @@ class Analytics extends Component {
 
     render() {
         return (
-            <View style={{ flex: 1 }}>
-                <Text>Analytics</Text>
+            <View style={styles.container}>
             </View>
-        );
+        )
     }
+}
+
+styles = {
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'space-around',
+    },
 }
 
 export default Analytics;
