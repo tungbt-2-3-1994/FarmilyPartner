@@ -15,5 +15,5 @@ export default combineReducers({
     store: Store,
     // searchBox: SearchBox,
     // storeBySearch: StoreBySearch,
-    // detailStore: DetailStore
+    detailStore: DetailStore
 });
