@@ -1,7 +1,7 @@
 import { GET_ACTIVE_ORDER, LOGOUT } from '../actions/types';
 
 const INITIAL = {
-    activeOrder: {},
+    activeOrder: [],
     loading: true
 };
 

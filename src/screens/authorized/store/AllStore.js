@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import {
     View, Text, Image, TouchableOpacity, TouchableHighlight, Dimensions, ActivityIndicator,
-    FlatList, NetInfo, PanResponder, Modal, Alert, Platform
+    FlatList, NetInfo, PanResponder, Modal, Alert, Platform, AsyncStorage
 } from 'react-native';
+
+import { Button, Badge } from 'native-base';
+
+import Icon from 'react-native-vector-icons/Ionicons';
 
 import { connect } from 'react-redux';
 
 import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
-
-import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import { CalloutItem } from '../../../components/StoreMap/Callout';
 
@@ -23,6 +25,8 @@ const LONGITUDE_DELTA = ASPECT_RATIO * LATITUDE_DELTA;
 
 var font = 'baskerville_bold_italic';
 
+const CURRENT_ORDER = 'CURRENT_ORDER';
+
 class AllStore extends Component {
 
     static navigationOptions = {
@@ -30,7 +34,7 @@ class AllStore extends Component {
             backgroundColor: '#388E3C',
         },
         headerBackTitle: null,
-        headerTitleStyle: { color: 'white', fontFamily: 'Baskerville-BoldItalic', fontSize: 20 }
+        headerTitleStyle: { color: 'white', fontFamily: 'Baskerville-BoldItalic', fontSize: 20 },
     }
 
     constructor(props) {
@@ -45,17 +49,14 @@ class AllStore extends Component {
             },
             markers: [],
             animating: true,
+            badge: 0,
             currentOrder: []
         }
-        // this._handleConnectionChange = this._handleConnectionChange.bind(this);
     }
 
     componentWillMount() {
-        // console.log('asas', this.props.user.user.user.id);
         this.props.getAllStores();
     }
-
-
 
     componentWillReceiveProps(nextProps) {
         this.setState({
@@ -67,17 +68,20 @@ class AllStore extends Component {
             });
         }
         if (nextProps.orderLoading == false) {
-            if (nextProps.activeOrder.data.length != 0) {
-                Alert.alert('YES');
+            console.log('');
+            if (nextProps.activeOrder.length != 0) {
+                this.setState({
+                    badge: this.state.badge + nextProps.activeOrder.length,
+                    currentOrder: nextProps.activeOrder.concat(this.state.currentOrder)
+                });
             }
         }
-
     }
 
     componentDidMount() {
-        // setInterval(() => {
-        //     this.props.getActiveOrder();
-        // }, 5000);
+        setInterval(() => {
+            this.props.getActiveOrder();
+        }, 5000);
         // NetInfo.isConnected.addEventListener('change', this._handleConnectionChange);
     }
 
@@ -140,6 +144,28 @@ class AllStore extends Component {
                         color='red'
                         style={styles.activityIndicator}
                     />}
+                <TouchableOpacity style={{ position: 'absolute', top: 15, right: 15 }}
+                    onPress={() => {
+                        if (this.state.badge == 0) {
+                            Alert.alert('Bạn không có thông báo');
+                        } else {
+                            this.setState({
+                                badge: 0
+                            });
+                            this.props.navigation.navigate('CurrentOrder', { 'data': this.state.currentOrder });
+                        }
+                    }}>
+                    {this.state.badge == 0 ?
+                        <Icon name='ios-notifications' size={40} color='white' />
+                        :
+                        <Icon name='ios-notifications' size={40} color='green' />}
+                    {this.state.badge == 0 ?
+                        <View style={{ backgroundColor: 'transparent', position: 'absolute', top: -5, right: -5, padding: 3 }}><Text style={{ color: 'rgba(52, 52, 52, 0.2)', fontSize: 20 }}>{this.state.badge}</Text></View>
+                        :
+                        <View style={{ backgroundColor: 'red', position: 'absolute', top: -5, right: -5, borderRadius: 20, padding: 3 }}><Text style={{ color: 'white', fontSize: 20, fontWeight: 'bold' }}>{this.state.badge}</Text></View>
+                    }
+
+                </TouchableOpacity>
             </View >
         );
     }
@@ -156,7 +182,7 @@ const styles = {
 };
 
 const mapStateToProps = (state) => {
-    console.log('state', state.data);
+    console.log('state', state.activeOrder);
     return ({
         user: state.userInfor,
         stores: state.store.stores,

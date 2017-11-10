@@ -10,11 +10,12 @@ export const getActiveOrder = () => {
         fetch(`http://farm.ongnhuahdpe.com/partner/stores/1/orders/active`)
             .then(response => response.json())
             .then((responseData) => {
+                // console.log(responseData);
                 if (responseData.status == 'success') {
                     console.log('dd', responseData);
                     dispatch({
                         type: GET_ACTIVE_ORDER,
-                        payload: responseData
+                        payload: responseData.data
                     });
                 }
             }).catch((error => console.log(error)));

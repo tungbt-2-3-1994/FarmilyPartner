@@ -6,7 +6,7 @@ const { width, height } = Dimensions.get('window');
 
 class Analytics extends Component {
 
-    static navigationOptions = {
+    static navigationOptions = {         
         headerStyle: {
             backgroundColor: '#388E3C',
         },
@@ -56,21 +56,21 @@ class Analytics extends Component {
                     name: '',
                     y: 56.33
                 }, {
-                    name: 'Chrome',
+                    name: 'Rau muống',
                     y: 24.03,
                     sliced: true,
                     selected: true
                 }, {
-                    name: 'Firefox',
+                    name: 'Rau cải thìa',
                     y: 10.38
                 }, {
-                    name: 'Safari',
+                    name: 'Rau cải xoăn',
                     y: 4.77
                 }, {
-                    name: 'Opera',
+                    name: 'Cải tím',
                     y: 0.91
                 }, {
-                    name: 'Other',
+                    name: 'Các loại khác',
                     y: 0.2
                 }]
             }]
@@ -78,9 +78,6 @@ class Analytics extends Component {
         return (
             <View style={{ flex: 1 }}>
                 <ChartView style={{ flex: 1, backgroundColor: 'white' }} config={conf} />
-                <View style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: height / 3, backgroundColor: 'rgba(100, 23, 44, 0.2)' }}>
-                    <Text>asasfas</Text>
-                </View>
             </View>
         );
     }

@@ -31,8 +31,6 @@ class Account extends Component {
         animating: false
     }
 
-
-
     render() {
         let view;
         let avatarView;

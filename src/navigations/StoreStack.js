@@ -8,7 +8,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import AllStore from '../screens/authorized/store/AllStore';
 import DetailStore from '../screens/authorized/store/DetailStore';
-import EditStore from '../screens/authorized/store/EditStore';
+import CurrentOrder from '../screens/authorized/store/CurrentOrder';
 
 const WIDTH = Dimensions.get('window').width;
 
@@ -25,10 +25,10 @@ export const StoreStack = StackNavigator({
             title: 'Danh sách hàng hóa'
         }
     },
-    EditStore: {
-        screen: EditStore,
+    CurrentOrder: {
+        screen: CurrentOrder,
         navigationOptions: {
-            title: 'Chỉnh sửa hàng hóa'
+            title: 'Đơn đặt hàng mới'
         }
     }
 }, {

@@ -477,7 +477,7 @@ class Detail extends Component {
                                 <Text style={{ fontFamily: 'Cochin', fontSize: width / 12, color: '#388E3C', marginLeft: width / 15 }}>{this.state.data.EC}</Text>
                                 <Image style={{ width: width / 9, height: width / 9, resizeMode: 'stretch' }} source={require('../../../img/bolt.png')} />
                             </View>
-                            <Text style={{ fontFamily: 'Cochin', fontSize: width / 25 }}>mS/cm</Text>
+                            <Text style={{ fontFamily: 'Cochin', fontSize: width / 25 }}>µS/cm</Text>
                             <Text style={{ fontSize: width / 30 }}>Độ dẫn điện</Text>
 
                         </View>
