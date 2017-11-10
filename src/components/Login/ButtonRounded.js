@@ -30,18 +30,18 @@ export default class ButtonRounded extends Component {
 
 export const styles = StyleSheet.create({
     button: {
-        backgroundColor: '#23b0f9',
+        backgroundColor: '#009689',
         borderRadius: 100,
         alignSelf: 'center',
         paddingHorizontal: 20,
-        paddingTop: 10,
-        paddingBottom: 12,
+        paddingTop: 15,
+        paddingBottom: 15,
         minWidth: 200,
     },
     caption: {
         color: '#fff',
         textAlign: 'center',
         fontWeight: 'bold',
-        fontSize: 18
+        fontSize: 20
     },
 });

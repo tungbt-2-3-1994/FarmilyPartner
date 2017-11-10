@@ -36,8 +36,30 @@ class Account extends Component {
         this.state = {
             textEmail: '',
             textPassword: '',
-            animating: false
+            animating: false,
+            emailBorderColor: '#ffffff',
+            passBorderColor: '#ffffff',
+            emailPlaceholderColor: '#787878',
+            passPlaceholderColor: '#787878',
         }
+    }
+
+    handleEmailFocus = () => {
+        this.setState({
+            emailBorderColor: '#009689',
+            passBorderColor: '#ffffff',
+            emailPlaceholderColor: '#21458c',
+            passPlaceholderColor: '#787878',
+        });
+    }
+
+    handlePassFocus = () => {
+        this.setState({
+            emailBorderColor: '#ffffff',
+            passBorderColor: '#009689',
+            emailPlaceholderColor: '#787878',
+            passPlaceholderColor: '#21458c',
+        });
     }
 
     componentWillMount() {
@@ -94,26 +116,48 @@ class Account extends Component {
                     />
                     <View style={{}}>
                         <TextInput
-                            placeholder="Email hoặc tên đăng nhập"
+                            placeholder="partner@gmail.com"
                             returnKeyType="next"
-                            placeholderTextColor="#1F4491"
-                            style={styles.textbox}
-
+                            placeholderTextColor={this.state.emailPlaceholderColor}
+                            style={{
+                                backgroundColor: '#ffffff',
+                                borderWidth: 1,
+                                color: '#21458c',
+                                marginBottom: 18,
+                                paddingBottom: 15,
+                                paddingTop: 15,
+                                paddingLeft: 20,
+                                paddingRight: 20,
+                                borderRadius: 30,
+                                borderColor: this.state.emailBorderColor
+                            }}
                             onSubmitEditing={() => this.passwordInput.focus()}
                             underlineColorAndroid='transparent'
                             keyboardType="email-address"
                             onChangeText={(text) => { this.setState({ textEmail: text }) }}
+                            onFocus={() => { this.handleEmailFocus() }}
                         />
                         <TextInput
                             secureTextEntry={true}
-                            placeholder="Mật khẩu"
+                            placeholder="Nhập mật khẩu"
                             returnKeyType="go"
-
                             underlineColorAndroid="transparent"
-                            placeholderTextColor="#1F4491"
-                            style={styles.textbox}
+                            placeholderTextColor={this.state.passPlaceholderColor}
+                            style={{
+                                backgroundColor: '#ffffff',
+                                borderWidth: 1,
+                                color: '#21458c',
+                                marginBottom: 18,
+                                paddingBottom: 15,
+                                paddingTop: 15,
+                                paddingLeft: 20,
+                                paddingRight: 20,
+                                borderRadius: 30,
+                                borderColor: this.state.passBorderColor
+                            }}
                             ref={(input) => this.passwordInput = input}
                             onChangeText={(text) => { this.setState({ textPassword: text }) }}
+                            onFocus={() => { this.handlePassFocus() }}
                         />
 
                         <View style={css.auth_submit}>
@@ -138,13 +182,7 @@ class Account extends Component {
 
 const styles = {
     textbox: {
-        backgroundColor: 'transparent',
-        borderBottomWidth: 2,
-        borderBottomColor: '#f68838',
-        color: '#1F4491',
-        marginBottom: 18,
-        paddingBottom: 3,
-        fontWeight: 'bold'
+
     },
     activityIndicator: {
         position: 'absolute', top: 0, left: 0,
