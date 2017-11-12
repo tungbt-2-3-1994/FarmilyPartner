@@ -11,7 +11,7 @@ class AppNavigator extends Component {
         return (
             <View style={{ flex: 1 }}>
                 <StatusBar
-                    backgroundColor="blue"
+                    backgroundColor="#388E3C"
                     barStyle="light-content"
                 />
                 <Root

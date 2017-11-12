@@ -121,10 +121,13 @@ const styles = {
     },
     transparentButtonOut: {
         marginTop: 30,
-        borderColor: '#3B5699',
-        borderWidth: 2,
         borderRadius: 5,
-        marginLeft: 100, marginRight: 100,
+        flexDirection: 'row',
+        backgroundColor: '#009689',
+        padding: 10,
+        width: 200,
+        justifyContent: 'center',
+        alignSelf: 'center'
     },
     buttonBlueText: {
         fontSize: 14,

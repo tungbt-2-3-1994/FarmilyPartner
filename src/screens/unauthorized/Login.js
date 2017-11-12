@@ -112,11 +112,11 @@ class Account extends Component {
                 <ScrollView style={css.auth_content}>
                     <Image
                         style={css.logo}
-                        source={require('../../img/logofarmilytransparent.png')}
+                        source={require('../../img/partnerTransparent.png')}
                     />
                     <View style={{}}>
                         <TextInput
-                            placeholder="partner@gmail.com"
+                            placeholder="Nhập email"
                             returnKeyType="next"
                             placeholderTextColor={this.state.emailPlaceholderColor}
                             style={{

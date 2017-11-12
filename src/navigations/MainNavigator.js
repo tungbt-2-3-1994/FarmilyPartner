@@ -32,7 +32,7 @@ const MainNavigator = TabNavigator({
     AccountTab: {
         screen: Account,
         navigationOptions: {
-            tabBarLabel: 'Cửa hàng',
+            tabBarLabel: 'Tài khoản',
         }
     },
 }, {
