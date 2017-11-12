@@ -33,7 +33,7 @@ class Detail extends Component {
         headerBackTitle: null,
         headerTintColor: 'white',
         headerTitleStyle: { color: 'white', fontFamily: 'Baskerville-BoldItalic', fontSize: 20 },
-        headerRight: <TouchableOpacity style={{ marginRight: 5 }} onPress={() => { e.setModalVisible(true) }}><Icon2 size={20} color='white' name='exchange' /></TouchableOpacity>
+        headerRight: <TouchableOpacity style={{ marginRight: 5 }} onPress={() => { e.setModalVisible(true) }}><Icon1 size={20} color='white' name='settings' /></TouchableOpacity>
     }
 
     state = {
@@ -418,7 +418,7 @@ class Detail extends Component {
                             <TouchableOpacity style={{ position: 'absolute', top: 5, right: 5, backgroundColor: '#388E3C' }} onPress={() => {
                                 this.setModalVisible(!this.state.modalVisible)
                             }}>
-                                <Icon1 name='cancel' color='#D53343' size={30} />
+                                <Icon1 name='close' color='#D53343' size={30} />
                             </TouchableOpacity>
                         </View>
                     </View>
