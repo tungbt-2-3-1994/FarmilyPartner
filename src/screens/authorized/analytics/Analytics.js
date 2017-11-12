@@ -50,7 +50,7 @@ class Analytics extends Component {
                 enabled: false
             },
             series: [{
-                name: 'Brands',
+                name: 'Xà lách tím',
                 colorByPoint: true,
                 data: [{
                     name: '',

@@ -70,19 +70,16 @@ class Account extends Component {
                         </View>
                     </View>
 
-                    <Container>
-                        <ButtonLogin
-                            styles={{ button: styles.transparentButtonOut }}
-                            onPress={() => {
-                                this.setState({ animating: true });
-                                this.props.logout()
-                            }}
-                        >
-                            <View style={styles.inline}>
-                                <Text style={[styles.buttonBlueText, styles.buttonBigText]}>  Đăng xuất </Text>
-                            </View>
-                        </ButtonLogin>
-                    </Container>
+                    <TouchableOpacity
+                        style={styles.transparentButtonOut}
+                        onPress={() => {
+                            this.setState({ animating: true });
+                            this.props.logout()
+                        }}
+                    >
+                        <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 25 }}>Đăng xuất</Text>
+                        <Image style={{ marginLeft: 10, width: 30, height: 30 }} source={require('../../../img/signOut.png')} />
+                    </TouchableOpacity>
                 </ScrollView>
             );
         } else {

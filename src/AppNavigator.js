@@ -10,10 +10,10 @@ class AppNavigator extends Component {
     render() {
         return (
             <View style={{ flex: 1 }}>
-                {/* <StatusBar
+                <StatusBar
                     backgroundColor="blue"
                     barStyle="light-content"
-                /> */}
+                />
                 <Root
                     navigation={addNavigationHelpers({
                         dispatch: this.props.dispatch,
