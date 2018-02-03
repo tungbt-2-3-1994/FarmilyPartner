@@ -8,7 +8,6 @@ import AppNavigator from './AppNavigator';
 export default class Farmily2017 extends Component {
 
     render() {
-        // console.ignoredYellowBox = ['Setting a timer'];
         return (
             <Provider store={store}>
                 <AppNavigator />
